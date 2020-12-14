@@ -5,5 +5,5 @@ export default {
   white: "#ffffff",
   yellow: "#ffe66d",
   titleGray: "#2c2c2c",
-  subTitleGray: "#4c4c4c",
+  subTitleGray: "#6e6969",
 };

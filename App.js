@@ -5,14 +5,17 @@ import WelcomeScreen from "./app/screens/WelcomeScreen";
 import ViewImageScreen from "./app/screens/ViewImageScreen";
 import AppText from "./app/components/AppText";
 import { NavigationContainer } from "@react-navigation/native";
+import Screen from "./app/components/Screen";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      {/* <ViewImageScreen /> */}
-      <AppText style={styles.title}>I Love React Native.</AppText>
-      {/* <WelcomeScreen /> */}
-    </View>
+    <Screen>
+      <View style={styles.container}>
+        {/* <ViewImageScreen /> */}
+        <AppText style={styles.title}>I Love React Native.</AppText>
+        {/* <WelcomeScreen /> */}
+      </View>
+    </Screen>
   );
 }
 const styles = StyleSheet.create({
