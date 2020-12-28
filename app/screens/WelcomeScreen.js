@@ -8,6 +8,7 @@ import {
   Alert,
 } from "react-native";
 import AppButton from "../components/AppButton";
+import colors from "../config/colors";
 
 const WelcomeScreen = () => {
   const handleLogin = () => {
@@ -18,7 +19,7 @@ const WelcomeScreen = () => {
   };
   return (
     <ImageBackground
-      blurRadius={3}
+      blurRadius={10}
       style={styles.background}
       source={require("../assets/Regent-Street.jpg")}
     >
@@ -29,7 +30,7 @@ const WelcomeScreen = () => {
         />
         <Text style={styles.tagline}>Swap What You Don't Need.</Text>
       </View>
-      <View style={styles.buttonContainer}>
+      <View style={styles.buttonsContainer}>
         <AppButton title="Login" onPress={() => handleLogin()} />
         <AppButton
           title="Register"
@@ -47,6 +48,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-end",
     alignItems: "center",
+    height: "100%",
+  },
+  buttonsContainer: {
+    width: "100%",
+    padding: 20,
   },
   logoContainer: {
     position: "absolute",
@@ -58,13 +64,4 @@ const styles = StyleSheet.create({
     height: 100,
   },
   tagline: { fontSize: 16, fontWeight: "bold", paddingVertical: 5 },
-  buttonContainer: {
-    width: "100%",
-    padding: 20,
-  },
-  registerButton: {
-    height: 70,
-    width: "100%",
-    backgroundColor: "#fc5c72",
-  },
 });

@@ -4,6 +4,8 @@ export default {
   black: "#000000",
   white: "#ffffff",
   yellow: "#ffe66d",
-  titleGray: "#2c2c2c",
-  subTitleGray: "#6e6969",
+  titleGray: "#2e2e2e",
+  subTitleGray: "#7e7e7e",
+  backgroundGray: "#f8f4f4",
+  danger: "#ff5454",
 };
