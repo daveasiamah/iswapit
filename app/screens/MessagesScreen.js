@@ -5,6 +5,8 @@ import ListItemSeparator from "../components/ListItemSeparator";
 import ListItemDeleteAction from "../components/ListItemDeleteAction";
 import Screen from "../components/Screen";
 import { useState } from "react";
+import AppText from "../components/AppText";
+import colors from "../config/colors";
 
 const initialMessages = [
   {
@@ -38,7 +40,7 @@ const refreshedMessages = [
   {
     name: "Dell XPS 14ZX 2020",
     price: "$1900",
-    image: { uri: "https://i.pravatar.cc/350" },
+    image: { uri: "https://i.pravatar.cc/600" },
   },
   {
     name: "PlayStation 4 Controller Elite Black 2020 Model",
@@ -77,9 +79,18 @@ export default function MessagesScreen() {
         onRefresh={() => {
           setMessages(refreshedMessages);
         }}
+        ListEmptyComponent={() => (
+          <AppText style={styles.emptyComponent}>No items</AppText>
+        )}
       />
     </Screen>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  emptyComponent: {
+    color: colors.primary,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+});

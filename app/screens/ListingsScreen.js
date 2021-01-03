@@ -41,6 +41,8 @@ const listings = [
 
 export default function ListingsScreen() {
   const [refreshing, setRefreshing] = useState(false);
+  const [items, setItems] = useState(listings);
+
   const renderListings = (item) => (
     <Card title={item.title} price subTitle={item.price} image={item.image} />
   );
@@ -48,13 +50,13 @@ export default function ListingsScreen() {
     <Screen style={styles.screen}>
       <View style={styles.container}>
         <FlatList
-          data={listings}
+          data={items}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item) => item.title}
           renderItem={({ item }) => renderListings(item)}
           ItemSeparatorComponent={() => <ListItemSeparator />}
           refreshing={refreshing}
-          onRefresh={() => console.log("finished refreshing!")}
+          onRefresh={() => setItems(listings.slice(0, 2))}
         />
       </View>
     </Screen>
@@ -62,6 +64,6 @@ export default function ListingsScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { paddingHorizontal: 20 },
+  container: { paddingHorizontal: 20, paddingTop: 20 },
   screen: { backgroundColor: colors.backgroundGray },
 });

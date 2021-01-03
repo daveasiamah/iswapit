@@ -9,6 +9,5 @@ export default {
     fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
     width: "90%",
     lineHeight: 20,
-    // backgroundColor: "cyan",
   },
 };

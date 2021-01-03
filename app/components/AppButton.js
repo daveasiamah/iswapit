@@ -14,18 +14,18 @@ const AppButton = ({ title, color = "primary", onPress }) => (
 
 const styles = StyleSheet.create({
   button: {
-    height: 70,
+    height: 60,
     width: "100%",
-    borderRadius: 335,
+    borderRadius: 35,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: colors.primary,
-    elevation: 3,
+    elevation: 5,
     marginVertical: 10,
   },
   text: {
     color: colors.white,
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: "bold",
     textTransform: "uppercase",
   },
