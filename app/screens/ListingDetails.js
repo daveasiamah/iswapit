@@ -4,20 +4,27 @@ import colors from "../config/colors";
 import AppText from "../components/AppText";
 import ListItem from "../components/ListItem";
 
-const ListingDetailsScreen = ({ title, subTitle, image, style }) => (
-  <View>
-    <Image source={image} style={styles.image} />
-    <View style={styles.detailsContainer}>
-      <AppText>{title}</AppText>
-      <AppText style={styles.subTitle}>{subTitle}</AppText>
+const ListingDetailsScreen = ({ route }) => {
+  const listing = route.params;
+
+  return (
+    <View>
+      <Image source={{ uri: listing.images[0].url }} style={styles.image} />
+      <View style={styles.detailsContainer}>
+        <AppText style={styles.title}>{listing.title}</AppText>
+        <AppText style={styles.subTitle}>${listing.price}</AppText>
+        {listing.description && (
+          <AppText style={styles.description}>{listing.description}</AppText>
+        )}
+      </View>
+      <ListItem
+        title="David"
+        subTitle="10 Listings"
+        image={{ uri: "https://picsum.photos/400/400" }}
+      />
     </View>
-    <ListItem
-      title="IceColdDave"
-      subTitle="25 Listings"
-      image={{ uri: "https://i.pravatar.cc/150?u=fake@pravatar.com" }}
-    />
-  </View>
-);
+  );
+};
 export default ListingDetailsScreen;
 
 const styles = StyleSheet.create({
@@ -27,14 +34,14 @@ const styles = StyleSheet.create({
   },
   detailsContainer: {
     padding: 10,
-    marginBottom: 20,
+    // marginBottom: 20,
     backgroundColor: colors.white,
   },
+  description: { marginTop: 15, padding: 5 },
   image: {
     height: 300,
-    // resizeMode: "contain",
     width: "100%",
   },
   subTitle: { color: colors.secondary, fontWeight: "bold" },
-  title: { marginBottom: 7 },
+  title: { fontWeight: "bold", marginBottom: 7 },
 });

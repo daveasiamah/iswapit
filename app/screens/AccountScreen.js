@@ -5,19 +5,22 @@ import ListItem from "../components/ListItem";
 import ListItemSeparator from "../components/ListItemSeparator";
 import Screen from "../components/Screen";
 import colors from "../config/colors";
+import routes from "../navigation/routes";
 
 const menuItems = [
   {
     title: "My Listings",
     icon: { name: "format-list-bulleted", backgroundColor: colors.primary },
+    screen: "MyListings",
   },
   {
     title: "My Messages",
     icon: { name: "email", backgroundColor: colors.secondary },
+    screen: "Messages",
   },
 ];
 
-export default function AccountScreen() {
+export default function AccountScreen({ navigation }) {
   const renderMenuItem = (item) => (
     <ListItem
       title={item.title}
@@ -27,6 +30,7 @@ export default function AccountScreen() {
           backgroundColor={item.icon.backgroundColor}
         />
       }
+      onPress={() => navigation.navigate(item.screen)}
     />
   );
   return (
@@ -36,6 +40,7 @@ export default function AccountScreen() {
           image={require("../assets/phonebg.jpg")}
           title="iceColdDave"
           subTitle="icecolddave@mk.com"
+          onPress={() => navigation.navigate(routes.PROFILE)}
         />
       </View>
       <View style={styles.container}>

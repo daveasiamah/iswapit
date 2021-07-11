@@ -9,14 +9,9 @@ import {
 } from "react-native";
 import AppButton from "../components/AppButton";
 import colors from "../config/colors";
+import routes from "../navigation/routes";
 
-const WelcomeScreen = () => {
-  const handleLogin = () => {
-    Alert.alert("Login Button Pressed!", "You Pressed the Login Button");
-  };
-  const handleRegister = () => {
-    Alert.alert("Register Button Pressed!", "You Pressed the Register Button");
-  };
+const WelcomeScreen = ({ navigation }) => {
   return (
     <ImageBackground
       blurRadius={10}
@@ -31,11 +26,14 @@ const WelcomeScreen = () => {
         <Text style={styles.tagline}>Swap What You Don't Need.</Text>
       </View>
       <View style={styles.buttonsContainer}>
-        <AppButton title="Login" onPress={() => handleLogin()} />
+        <AppButton
+          title="Login"
+          onPress={() => navigation.navigate(routes.LOGIN)}
+        />
         <AppButton
           title="Register"
           color="secondary"
-          onPress={() => handleRegister()}
+          onPress={() => navigation.navigate(routes.REGISTER)}
         />
       </View>
     </ImageBackground>

@@ -41,7 +41,7 @@ export default function ListItem({
           </View>
           <MaterialCommunityIcons
             name="chevron-right"
-            size={20}
+            size={30}
             color={colors.subTitleGray}
           />
         </View>
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
   },
   subTitle: { color: colors.subTitleGray },
   title: {
-    fontWeight: "600",
+    fontWeight: "900",
     color: colors.titleGray,
   },
   detailsContainer: {

@@ -1,62 +1,66 @@
-import React, { useState } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { FlatList, Image, StyleSheet, View } from "react-native";
+
+import listingsApi from "../api/listings";
+import useApi from "../hooks/useApi";
+
+import ActivityIndicator from "../components/ActivityIndicator";
 import Card from "../components/Card";
-import ListItem from "../components/ListItem";
-import ListItemSeparator from "../components/ListItemSeparator";
-import Screen from "../components/Screen";
 import colors from "../config/colors";
+import Screen from "../components/Screen";
+import ListItemSeparator from "../components/ListItemSeparator";
+import routes from "../navigation/routes";
+import AppButton from "../components/AppButton";
+import AppText from "../components/AppText";
 
-const listings = [
-  {
-    id: 1,
-    title: "Red Jacket for sale",
-    price: "79.99",
-    image: { uri: "https://picsum.photos/400/400" },
-  },
-  {
-    id: 123,
-    title: "Red Hat for sale",
-    price: "90.99",
-    image: { uri: "https://picsum.photos/400/350" },
-  },
-  {
-    id: 132,
-    title: "Black Jacket for sale",
-    price: "120.99",
-    image: { uri: "https://picsum.photos/500/300" },
-  },
-  {
-    id: 210,
-    title: "Green Blazer for sale",
-    price: "85.99",
-    image: { uri: "https://picsum.photos/200/200" },
-  },
-  {
-    id: 901,
-    title: "Blue Jeans for sale",
-    price: "30.99",
-    image: { uri: "https://picsum.photos/300/400" },
-  },
-];
-
-export default function ListingsScreen() {
+export default function ListingsScreen({ navigation }) {
   const [refreshing, setRefreshing] = useState(false);
-  const [items, setItems] = useState(listings);
 
+  const {
+    data: listings,
+    error,
+    loading,
+    request: loadListings,
+  } = useApi(listingsApi.getListings);
+
+  //Render Listings
   const renderListings = (item) => (
-    <Card title={item.title} price subTitle={item.price} image={item.image} />
+    <>
+      <Card
+        title={item.title}
+        price
+        subTitle={item.price}
+        imageUrl={item.images[0].url}
+        onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
+      />
+    </>
   );
+
+  useEffect(() => {
+    loadListings();
+  }, []);
+
   return (
     <Screen style={styles.screen}>
+      {error && (
+        <>
+          <AppText>Could not retrieve the listings.</AppText>
+          <AppButton titl="Retry" onPress={loadListings} />
+        </>
+      )}
+      <ActivityIndicator
+        visible={loading}
+        style={{ position: "absolute", top: 150 }}
+      />
       <View style={styles.container}>
         <FlatList
-          data={items}
+          data={listings}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item) => item.title}
           renderItem={({ item }) => renderListings(item)}
           ItemSeparatorComponent={() => <ListItemSeparator />}
           refreshing={refreshing}
-          onRefresh={() => setItems(listings.slice(0, 2))}
+          onRefresh={() => loadListings()}
         />
       </View>
     </Screen>
@@ -64,6 +68,6 @@ export default function ListingsScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { paddingHorizontal: 20, paddingTop: 20 },
+  container: { paddingHorizontal: 20 },
   screen: { backgroundColor: colors.backgroundGray },
 });

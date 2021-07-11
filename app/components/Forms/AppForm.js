@@ -5,10 +5,12 @@ function AppForm({ initialValues, onSubmit, validationSchema, children }) {
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={(values) => onSubmit(values)}
+      onSubmit={(values, formik) =>
+        onSubmit(values, formik.resetForm({ values: "" }))
+      }
       validationSchema={validationSchema}
     >
-      {() => <>{children}</>}
+      {<>{children}</>}
     </Formik>
   );
 }
