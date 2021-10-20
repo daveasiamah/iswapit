@@ -1,26 +1,34 @@
+import "react-native-gesture-handler";
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { Text, View } from "react-native";
+
+import Screen from "./app/components/Screen";
+import ListingEditScreen from "./app/screens/ListingEditScreen";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
-import ViewImageScreen from "./app/screens/ViewImageScreen";
-import AppText from "./app/components/AppText";
+import { NavigationContainer } from "@react-navigation/native";
+import AuthNavigation from "./app/navigation/AuthNavigator";
+import navigationTheme from "./app/navigation/navigationTheme";
+import AppNavigator from "./app/navigation/AppNavigator";
+import NetInfo, { useNetInfo } from "@react-native-community/netinfo";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      {/* <ViewImageScreen /> */}
-      {/* <AppText style={styles.title}>I Love React Native.</AppText> */}
-      <WelcomeScreen />
+  const netInfo = useNetInfo();
+  console.log("NETWORK STATUS:", netInfo);
+  const Main = () => (
+    <NavigationContainer theme={navigationTheme}>
+      <AppNavigator />
+    </NavigationContainer>
+  );
+  return netInfo.isInternetReachable ? (
+    <Main />
+  ) : (
+    <View>
+      <Text>No internet connection.</Text>
     </View>
   );
+  // return (
+  //   <NavigationContainer theme={navigationTheme}>
+  //     <AppNavigator />
+  //   </NavigationContainer>
+  // );
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // justifyContent: "center",
-    // alignItems: "center",
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "500",
-  },
-});
